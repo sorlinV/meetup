@@ -38,38 +38,59 @@ app.set('view engine', 'html');
 app.use(express.static('public'));
 
 app.post("/event/add", bodyParser.urlencoded({ extended: true }),
-    function(request, response) {
-        console.log(request.body);
+    function(req, res) {
+        console.log(req.body);
+        if (req.body.title !== undefined && /*$_session['user'].pseudo !== undefined && */
+            req.body.date !== undefined && req.body.desc !== undefined) {
+            db.addevent(new Event(req.body.title, /*$_session['user'].pseudo*/ "bob",
+                req.body.date, req.body.desc));
+        }
 
     }
 );
 app.post("/event/del", bodyParser.urlencoded({ extended: true }),
-    function(request, response) {
-        console.log(request.body);
+    function(req, res) {
+        console.log(req.body);
+        if (req.body.title !== undefined && /*$_session['user'].pseudo !== undefined && */
+            req.body.date !== undefined && req.body.desc !== undefined /* && session === dbgeteventauthor*/ ) {}
+        /*db.delevent(dbgetevent.tCreate);*/
     }
 );
 
 app.post("/user/add", bodyParser.urlencoded({ extended: true }),
-    function(request, response) {
-        console.log(request.body);
+    function(req, res) {
+        console.log(req.body);
+        if (req.body.pseudo !== undefined &&
+            req.body.pass !== undefined) {
+            db.adduser(new User(req.body.pseudo, req.body.pass));
+            // create session cookie
+        }
     }
 );
 
 app.post("/user/connect", bodyParser.urlencoded({ extended: true }),
-    function(request, response) {
-        console.log(request.body);
+    function(req, res) {
+        console.log(req.body);
+        if ( /*dbgetuser.connect(req.body.pass)*/ true) {
+            // create session cookie
+        }
     }
 );
 
 app.post("/user/del", bodyParser.urlencoded({ extended: true }),
-    function(request, response) {
-        console.log(request.body);
+    function(req, res) {
+        console.log(req.body);
+        if (req.body.pseudo !== undefined &&
+            req.body.pass !== undefined) {
+            db.deluser(new User(req.body.pseudo, req.body.pass));
+        }
     }
 );
 
 app.post("/user/disconnect", bodyParser.urlencoded({ extended: true }),
-    function(request, response) {
-        console.log(request.body);
+    function(req, res) {
+        console.log(req.body);
+        //delete user cookie
     }
 );
 

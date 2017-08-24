@@ -14,10 +14,10 @@ module.exports = class Data {
         return true;
     }
 
-    deluser(user) {
+    deluser(user, pass) {
         let out = [];
         for (let u of this.users) {
-            if (u.pseudo !== user.pseudo) {
+            if (u.pseudo !== user.pseudo && u.connect(pass)) {
                 out.push(u);
             }
         }
