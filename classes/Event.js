@@ -1,4 +1,4 @@
-class Event {
+module.exports = class Event {
     constructor(title, author, date, desc) {
         this.title = title;
         this.author = author;

@@ -1,4 +1,4 @@
-class Data {
+module.exports = class Data {
     constructor() {
         this.events = [];
         this.users = [];
