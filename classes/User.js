@@ -1,4 +1,4 @@
-class User {
+module.exports = class User {
     constructor(pseudo, pass, salt = null) {
         this.pseudo = pseudo;
         this.salt = salt;
