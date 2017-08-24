@@ -1,0 +1,27 @@
+{
+  "name": "meetup",
+  "version": "0.0.0",
+  "description": "create a equivalent of meetup with server nodejs made home template bootstrape and mariadb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sorlinV/meetup.git"
+  },
+  "author": "sorlinV ClemenceLaffont",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sorlinV/meetup/issues"
+  },
+  "homepage": "https://github.com/sorlinV/meetup#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mustache": "^2.3.0",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.3",
+    "webpack": "^3.5.5"
+  }
+}
