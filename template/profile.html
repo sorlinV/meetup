@@ -1,2 +1,45 @@
 {{> header.html}}
+<main>
+    <section>
+        <h3>Bienvenue {{pseudo}}</h3>
+        <p>Que voulez vous faire ?</p>
+    </section>
+    <a href="new_event.html">Créer un nouvel évenement</a>
+    <section>
+        <h4>Mes évenements :</h4>
+        {{#userEvents}}
+            <article>
+                <h3>{{.title}}</h3>
+                <section>
+                    <p>{{.date}}</p>
+                    <p>{{.description}}</p>
+                </section>
+                <h5>Cet évenement vous est proposer par {{.author}}, dites lui merci !</h5>
+            </article>
+        {{/userEvents}}
+        {{^userEvents}}
+            <h5>vous n'avez rien de prévue en ce moment, et si vous créiez un nouvel évenement !</h5>
+        {{/userEvents}}
+    </section>
+    <section>
+        <h4>Modifier mon profil :</h4>
+        <fieldset><legend>Changer de pseudo</legend>
+            <form method="post" action="user/add">
+                <label for="pseudo">Pseudo</label>
+                <input type="submit" name="register" value="OK"/>
+            </form>
+        </fieldset>
+        <fieldset><legend>Changer de mot de pass</legend>
+            <form method="post" action="user/add">
+                <label for="oldPass">Ancien mot de passe</label>
+                <input type="password" id="oldPass" name="oldPass"/>
+                <label for="pass">Nouveau mot de passe</label>
+                <input type="passwod" id="pass" name="pass"/>
+                <label for="confirm">confirmez le nouveau mot de passe</label>
+                <input type="password" id="confirm" name="confirm"/>
+                <input type="submit" name="register" value="OK"/>
+            </form>
+        </fieldset>
+    </section>
+</main>
 {{> footer.html}}

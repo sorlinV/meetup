@@ -1,2 +1,15 @@
 {{> header.html}}
+<main>
+    <fieldset><legend>créer un nouvel évenement</legend>
+        <form method="post" action="event/add">
+            <label for="title">Intitulé</label>
+            <input type="text" id="title" name="title"/>
+            <label for="date">Date de l'évenement</label>
+            <input type="date" id="date" name="date"/>
+            <label for="confirm">Description</label>
+            <textarea id="confirm" name="confirm"></textarea>
+            <input type="submit" name="newEvent" value="OK"/>
+        </form>
+    </fieldset>
+</main>
 {{> footer.html}}

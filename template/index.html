@@ -1,15 +1,14 @@
 {{> header.html}}
 <main>
-    <h2>Tu t'ennuis tout seul chez toi ?<br/>Trouves une cougar !</h2>
-    <form method="post" action="events.html">
-        <label for="where">Oû ?
-            <input type="text" name="where" id="where" />
-        </label>
-        <label for="when">Quand ?
-            <input type="date" name="when" id="when" />
-        </label>
-        <input type="submit" name="search" value="GO!"/>
-    </form>
+    <section>
+        <h2>Tu t'ennuis tout seul chez toi ?<br/>Trouves une cougar !</h2>
+        <form method="post" action="events.html">
+            <label for="when">Quand ?
+                <input type="date" name="when" id="when" />
+            </label>
+            <input type="submit" name="search" value="GO!"/>
+        </form>
+    </section>
     <section>
         {{#fiveEvents}}
             <article>
