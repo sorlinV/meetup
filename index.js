@@ -106,8 +106,30 @@ app.post("/user/disconnect", bodyParser.urlencoded({ extended: true }),
     }
 );
 
-app.get('/:name', function(req, res) {
-    res.render(req.params.name, { title: 'Hey', message: 'Hello there!' })
+mustache_obj = {
+    events: db.events,
+    user: req.session.user,
+    fiveEvents: db.fiveEvents(),
+    userEvents: db.userEvents()
+}
+
+app.get('/', function(req, res) {
+    res.render('index', mustache_obj)
+});
+app.get('/register', function(req, res) {
+    res.render('register', mustache_obj)
+});
+app.get('/change_event', function(req, res) {
+    res.render('change_event', mustache_obj)
+});
+app.get('/events', function(req, res) {
+    res.render('events', mustache_obj)
+});
+app.get('/new_event', function(req, res) {
+    res.render('new_event', mustache_obj)
+});
+app.get('/profile', function(req, res) {
+    res.render('profile', mustache_obj)
 });
 
 app.listen(8080, function(err) {
