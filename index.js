@@ -40,10 +40,11 @@ app.use(express.static('public'));
 
 app.post("/event/add", bodyParser.urlencoded({ extended: true }),
     function(req, res) {
+        res.setHeader('Content-Type', 'text/html');
         console.log(req.body);
-        if (req.body.title !== undefined && /*$_session['user'].pseudo !== undefined && */
+        if (req.body.title !== undefined && req.session.pseudo !== undefined &&
             req.body.date !== undefined && req.body.desc !== undefined) {
-            db.addevent(new Event(req.body.title, /*$_session['user'].pseudo*/ "bob",
+            db.addEvent(new Event(req.body.title, req.session.pseudo,
                 req.body.date, req.body.desc));
         }
 
@@ -51,21 +52,23 @@ app.post("/event/add", bodyParser.urlencoded({ extended: true }),
 );
 app.post("/event/del", bodyParser.urlencoded({ extended: true }),
     function(req, res) {
+        res.setHeader('Content-Type', 'text/html');
         console.log(req.body);
         if (req.session.user !== undefined &&
             req.body.tCreate !== undefined &&
-            req.session.user === db.getevent(req.body.tCreate).author) {
-            db.delevent(db.getevent(tCreate));
+            req.session.user === db.getEvent(req.body.tCreate).author) {
+            db.delEvent(db.getEvent(tCreate));
         }
     }
 );
 
 app.post("/user/add", bodyParser.urlencoded({ extended: true }),
     function(req, res) {
+        res.setHeader('Content-Type', 'text/html');
         console.log(req.body);
         if (req.body.pseudo !== undefined &&
             req.body.pass !== undefined) {
-            db.adduser(new User(req.body.pseudo, req.body.pass));
+            db.addUser(new User(req.body.pseudo, req.body.pass));
             res.session.user = req.body.pseudo;
         }
         console.log(res.session.user);
@@ -74,8 +77,11 @@ app.post("/user/add", bodyParser.urlencoded({ extended: true }),
 
 app.post("/user/connect", bodyParser.urlencoded({ extended: true }),
     function(req, res) {
+        res.setHeader('Content-Type', 'text/html');
         console.log(req.body);
-        if (db.getuser(req.body.pseudo).connect(req.body.pass)) {
+        if (req.body.pseudo !== undefined &&
+            db.getUser(req.body.pseudo) !== false &&
+            db.getUser(req.body.pseudo).connect(req.body.pass)) {
             res.session.user = req.body.pseudo;
         }
     }
@@ -83,31 +89,25 @@ app.post("/user/connect", bodyParser.urlencoded({ extended: true }),
 
 app.post("/user/del", bodyParser.urlencoded({ extended: true }),
     function(req, res) {
+        res.setHeader('Content-Type', 'text/html');
         console.log(req.body);
         if (req.body.pseudo !== undefined &&
             req.body.pass !== undefined) {
-            db.deluser(new User(req.body.pseudo, req.body.pass));
+            db.delUser(new User(req.body.pseudo, req.body.pass));
         }
     }
 );
 
 app.post("/user/disconnect", bodyParser.urlencoded({ extended: true }),
     function(req, res) {
+        res.setHeader('Content-Type', 'text/html');
         console.log(req.body);
         req.session = {};
     }
 );
 
-// req.session.regenerate(function(err) {
-//     console.log("nouvelle session creer");
-// });
-
-// req.session.destroy(function(err) {
-//     console.log("cannot access session here");
-// });
-
-app.get('/', function(req, res) {
-    res.render('index', { title: 'Hey', message: 'Hello there!' })
+app.get('/:name', function(req, res) {
+    res.render(req.params.name, { title: 'Hey', message: 'Hello there!' })
 });
 
 app.listen(8080, function(err) {

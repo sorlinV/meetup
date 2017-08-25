@@ -4,7 +4,7 @@ module.exports = class Data {
         this.users = [];
     }
 
-    adduser(user) {
+    addUser(user) {
         for (let u of this.users) {
             if (u.pseudo === user.pseudo) {
                 return false;
@@ -14,7 +14,7 @@ module.exports = class Data {
         return true;
     }
 
-    deluser(user, pass) {
+    delUser(user, pass) {
         let out = [];
         for (let u of this.users) {
             if (u.pseudo !== user.pseudo && u.connect(pass)) {
@@ -24,11 +24,11 @@ module.exports = class Data {
         this.users = out;
     }
 
-    addevent(event) {
+    addEvent(event) {
         this.events.push(event);
     }
 
-    delevent(event) {
+    delEvent(event) {
         let out = [];
         for (let e of this.events) {
             if (e.tCreate !== event.tCreate) {
