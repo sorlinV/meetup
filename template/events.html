@@ -1,2 +1,25 @@
 {{> header.html}}
+<main>
+    <form method="post" action="events.html">
+        <label for="when">Quand ?
+            <input type="date" name="when" id="when" />
+        </label>
+        <input type="submit" name="search" value="GO!"/>
+    </form>
+    <section>
+        {{#Events}}
+            <article>
+                <h3>{{.title}}</h3>
+                <section>
+                    <p>{{.date}}</p>
+                    <p>{{.description}}</p>
+                </section>
+                <h5>Cet évenement vous est proposer par {{.author}}, dites lui merci !</h5>
+            </article>
+        {{/Events}}
+        {{^Events}}
+            <h3>Il n'y a rien de prévue en ce moment, et si vous créiez votre propre évenement !</h3>
+        {{/Events}}
+    </section>
+</main>
 {{> footer.html}}

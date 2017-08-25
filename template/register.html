@@ -1,0 +1,15 @@
+{{> header.html}}
+<main>
+    <fieldset><legend>Inscription</legend>
+        <form method="post" action="user/add">
+            <label for="pseudo">Pseudo</label>
+            <input type="text" id="pseudo" name="pseudo"/>
+            <label for="pass">Mot de passe</label>
+            <input type="passwod" id="pass" name="pass"/>
+            <label for="confirm">confirmez le mot de passe</label>
+            <input type="password" id="confirm" name="confirm"/>
+            <input type="submit" name="register" value="OK"/>
+        </form>
+    </fieldset>
+</main>
+{{> footer.html}}
