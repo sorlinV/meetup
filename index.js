@@ -9,6 +9,7 @@ const Data = require('./classes/Data.js');
 
 let app = express();
 let db = new Data();
+
 let partials = (function() {
     const folder = "template/partial";
     let partials = {};
@@ -51,9 +52,11 @@ app.post("/event/add", bodyParser.urlencoded({ extended: true }),
 app.post("/event/del", bodyParser.urlencoded({ extended: true }),
     function(req, res) {
         console.log(req.body);
-        if (req.body.title !== undefined && /*$_session['user'].pseudo !== undefined && */
-            req.body.date !== undefined && req.body.desc !== undefined /* && session === dbgeteventauthor*/ ) {}
-        /*db.delevent(dbgetevent.tCreate);*/
+        if (req.session.user !== undefined &&
+            req.body.tCreate !== undefined &&
+            req.session.user === db.getevent(req.body.tCreate).author) {
+            db.delevent(db.getevent(tCreate));
+        }
     }
 );
 
@@ -63,16 +66,17 @@ app.post("/user/add", bodyParser.urlencoded({ extended: true }),
         if (req.body.pseudo !== undefined &&
             req.body.pass !== undefined) {
             db.adduser(new User(req.body.pseudo, req.body.pass));
-            // create session cookie
+            res.session.user = req.body.pseudo;
         }
+        console.log(res.session.user);
     }
 );
 
 app.post("/user/connect", bodyParser.urlencoded({ extended: true }),
     function(req, res) {
         console.log(req.body);
-        if ( /*dbgetuser.connect(req.body.pass)*/ true) {
-            // create session cookie
+        if (db.getuser(req.body.pseudo).connect(req.body.pass)) {
+            res.session.user = req.body.pseudo;
         }
     }
 );
@@ -90,9 +94,17 @@ app.post("/user/del", bodyParser.urlencoded({ extended: true }),
 app.post("/user/disconnect", bodyParser.urlencoded({ extended: true }),
     function(req, res) {
         console.log(req.body);
-        //delete user cookie
+        req.session = {};
     }
 );
+
+// req.session.regenerate(function(err) {
+//     console.log("nouvelle session creer");
+// });
+
+// req.session.destroy(function(err) {
+//     console.log("cannot access session here");
+// });
 
 app.get('/', function(req, res) {
     res.render('index', { title: 'Hey', message: 'Hello there!' })

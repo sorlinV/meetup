@@ -37,4 +37,22 @@ module.exports = class Data {
         }
         this.events = out;
     }
+
+    getEvent(tCreate) {
+        for (let i = 0; i < this.events.lenght; ++i) {
+            if (tCreate === this.events[i].tCreate) {
+                return this.events[i];
+            }
+        }
+        return false;
+    }
+
+    getUser(pseudo) {
+        for (let i = 0; i < this.users.lenght; ++i) {
+            if (pseudo === this.users[i].pseudo) {
+                return this.users[i];
+            }
+        }
+        return false;
+    }
 }
